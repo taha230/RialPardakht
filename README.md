@@ -105,7 +105,7 @@ Within the download you'll find the following directories and files:
    |         |    |-- scripts.html         # Scripts common to all pages
    |         |
    |         |-- layouts/                  # Master pages
-   |         |    |-- base-fullscreen.html # Used by Authentication pages
+   |         |    |-- base-fullscreen_home.html # Used by Authentication pages
    |         |    |-- base.html            # Used by common pages
    |         |
    |         |-- accounts/                 # Authentication pages
