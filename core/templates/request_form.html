@@ -1,0 +1,106 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block content %}
+<br>
+
+<div class="row justify-content-center">
+
+
+        <div class="col-lg-6 col-md-8">
+
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-transparent pb-5">
+              <div class="text-muted text-right mt-2 mb-4"><h1>ایجاد درخواست جدید</h1></div>
+
+            </div>
+            <div class="card-body px-lg-5 py-lg-5">
+
+            <form action="/your-name/" method="post" >
+              <div class="text-muted text-right mt-2 mb-4">
+                <div class=" text_right">
+                  <span >وبسایت</span>
+                </div>
+
+                  <input id="website" type="text" name="website_input" value="{{ request_website }}">
+              </div>
+
+              <div class="text-muted text-right mt-2 mb-4">
+                <div class=" text_right">
+                  <span >نام کاربری</span>
+                </div>
+
+                  <input id="username" type="text" name="username_input" value="{{ request_username }}">
+              </div>
+
+              <div class="text-muted text-right mt-2 mb-4">
+                <div class=" text_right">
+                  <span >پسورد</span>
+                </div>
+
+                  <input id="password" type="text" name="password_input" value="{{ request_password }}">
+              </div>
+
+              <div class="text-muted text-right mt-2 mb-4">
+                <div class=" text_right">
+                  <span >قیمت</span>
+                </div>
+
+                  <input id="price" type="text" name="price_input" value="{{ request_price }}">
+              </div>
+
+              <div class="text-muted text-right mt-2 mb-4">
+                <div class=" text_right">
+                  <span >توضیحات</span>
+                </div>
+
+                  <input style="width: 600px; height:200px;" id="description" type="text" name="description_input" value="{{ request_description }}">
+              </div>
+
+
+              <div class="text-muted text-right mt-2 mb-4">
+                <span ><a href="#!">قوانین ریال پرداخت</a> را مطالعه کردم و قبول دارم</span>
+
+                <input type="checkbox" id="accept_checkbox" name="accept_checkbox_input" value="{{ request_accept }}">
+
+              </div>
+
+<!--              <div class="form-group">-->
+<!--                    <div class="input-group input-group-alternative">-->
+<!--                      <div class="input-group-prepend">-->
+<!--                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>-->
+<!--                      </div>-->
+<!--                      {{ form.password2 }}-->
+<!--                    </div>-->
+<!--              </div>-->
+
+              <br>
+              <br>
+
+              <div class="text-muted text-center mt-2 mb-4">
+
+                <input type="submit" value="ثبت درخواست جدید">
+              </div>
+
+            </form>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

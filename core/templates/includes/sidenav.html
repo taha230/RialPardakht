@@ -115,6 +115,12 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link {% if 'tables' in segment %} active {% endif %}" href="/request_form.html">
+              <i class="ni ni-email-83 text-info"></i>Tickets
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">
               <i class="ni ni-user-run text-red"></i> Logout
             </a>
