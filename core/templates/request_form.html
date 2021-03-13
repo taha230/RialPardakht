@@ -62,6 +62,8 @@
               <div class="text-muted text-right mt-2 mb-4">
                 <span ><a href="#!">قوانین ریال پرداخت</a> را مطالعه کردم و قبول دارم</span>
 
+                {{ request.user.id }}
+
                 <input type="checkbox" id="accept_checkbox" name="accept_checkbox_input" value="{{ request_accept }}">
 
               </div>
