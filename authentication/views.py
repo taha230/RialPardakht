@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.forms.utils import ErrorList
 from django.http import HttpResponse
-from .forms import LoginForm, SignUpForm
+from .forms import LoginForm, SignUpForm, RequestForm
 
 def home_view(request):
     form = LoginForm(request.POST or None)
@@ -80,3 +80,32 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg" : msg, "success" : success })
+
+
+def insert_request(request):
+    msg = None
+    success = False
+
+    if request.method == "POST":
+        form = RequestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            website = form.cleaned_data.get("website")
+            description = form.cleaned_data.get("description")
+            price = form.cleaned_data.get("price")
+
+            print(price)
+
+            msg = 'Request inserted - please <a href="/login">login</a>.'
+            success = True
+
+            # return redirect("/login/")
+
+        else:
+            msg = 'Form is not valid'
+    else:
+        form = SignUpForm()
+
+    return render(request, "requests.html", {"form": form, "msg": msg, "success": success})

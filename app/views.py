@@ -27,6 +27,14 @@ def home(request):
     html_template = loader.get_template('index.html')
     return HttpResponse(html_template.render(context, request))
 
+@login_required(login_url="/requests/")
+def home(request):
+    context = {}
+    context['segment'] = 'index'
+
+    html_template = loader.get_template('index.html')
+    return HttpResponse(html_template.render(context, request))
+
 @login_required(login_url="/login/")
 def pages(request):
     context = {}

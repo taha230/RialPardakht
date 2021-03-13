@@ -56,3 +56,43 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+class RequestForm(UserCreationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Username",
+                "class": "form-control"
+            }
+        ))
+    password = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Password",
+                "class": "form-control"
+            }
+        ))
+    website= forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Website",
+                "class": "form-control"
+            }
+        ))
+    description = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Description",
+                "class": "form-control"
+            }
+        ))
+    price = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Description",
+                "class": "form-control"
+            }
+        ))
+    class Meta:
+        model = User
+        fields = ('username', 'password', 'website', 'description', 'price')
