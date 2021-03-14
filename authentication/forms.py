@@ -75,7 +75,7 @@ class RequestForm(UserCreationForm):
     website= forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder" : "Website",
+                "placeholder" : "web",
                 "class": "form-control"
             }
         ))
@@ -89,7 +89,7 @@ class RequestForm(UserCreationForm):
     price = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder" : "Description",
+                "placeholder" : "",
                 "class": "form-control"
             }
         ))

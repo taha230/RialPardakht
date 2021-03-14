@@ -26,7 +26,7 @@
                   <span >وبسایت</span>
                 </div>
 
-                  <input id="website" type="text" name="website_input" value="{{ request_website }}">
+                  <input id="web" type="text" name="web" value="{{ form.web }}">
               </div>
 
               <div class="text-muted text-right mt-2 mb-4">
@@ -65,7 +65,6 @@
               <div class="text-muted text-right mt-2 mb-4">
                 <span ><a href="#!">قوانین ریال پرداخت</a> را مطالعه کردم و قبول دارم</span>
 
-                {{ request.user.id }}
 
                 <input type="checkbox" id="accept_checkbox" name="accept_checkbox_input" value="{{ request_accept }}">
 

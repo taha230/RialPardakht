@@ -87,20 +87,33 @@ def insert_request(request):
     msg = None
     success = False
 
-    print ('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB')
-
 
     if request.method == "POST":
+
         form = RequestForm(request.POST)
+        print("CCCCCCCCCCCCCCCCCCCCCCCcc")
+        print("website:" + str(form.website))
+
         if form.is_valid():
+            print("DDDDDDDDDDDDDDDd")
+
             form.save()
-            username = form.cleaned_data.get("username")
+            print("EEEEEEEEEEEEEEEE")
+
+            username = form.cleaned_data.get("website_input")
             password = form.cleaned_data.get("password")
             website = form.cleaned_data.get("website")
             description = form.cleaned_data.get("description")
             price = form.cleaned_data.get("price")
+            print("FFFFFFFFFFFFFFFFFF")
 
-            print(price)
+            user_id = form.cleaned_data.user.id
+            print("GGGGGGGGGGGGGGGGGGGg")
+
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+            print("price:" + str(price) + " username:" + str(username) + " password:" + str(password) + " website:" + str(website)  + " description: " + str(description) + " user_id:" + str(user_id))
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+            print("HHHHHHHHHHHHHHHHHHHHHHHH")
 
             msg = 'Request inserted - please <a href="/login">login</a>.'
             success = True
@@ -108,8 +121,9 @@ def insert_request(request):
             # return redirect("/login/")
 
         else:
+            print("ZZZZZZZZZZZZZZZZZZZZZZz")
+
             msg = 'Form is not valid'
     else:
-        form = SignUpForm()
-
+        pass
     return render(request, "requests.html", {"form": form, "msg": msg, "success": success})
