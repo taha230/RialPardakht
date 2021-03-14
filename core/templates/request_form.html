@@ -17,7 +17,10 @@
             </div>
             <div class="card-body px-lg-5 py-lg-5">
 
-            <form action="/your-name/" method="post" >
+            <form action="/requests/" method="post" >
+
+             {% csrf_token %}
+
               <div class="text-muted text-right mt-2 mb-4">
                 <div class=" text_right">
                   <span >وبسایت</span>
