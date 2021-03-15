@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.forms.utils import ErrorList
 from django.http import HttpResponse
-from .forms import LoginForm, SignUpForm, RequestForm
+from .forms import LoginForm, SignUpForm
 
 def home_view(request):
     form = LoginForm(request.POST or None)
@@ -83,6 +83,10 @@ def register_user(request):
     return render(request, "accounts/register.html", {"form": form, "msg" : msg, "success" : success })
 
 
+def insert_request_to_sqlite(request_website, request_username, request_password, request_price, request_description, request_accept_checkbox, request):
+    print('user_id : ' + str(request.user.id ))
+    return 'Success'
+
 def insert_request(request):
     msg = None
     success = False
@@ -90,40 +94,29 @@ def insert_request(request):
 
     if request.method == "POST":
 
-        form = RequestForm(request.POST)
-        print("CCCCCCCCCCCCCCCCCCCCCCCcc")
-        print("website:" + str(form.website))
+        form = LoginForm(request.POST or None)
+        
 
-        if form.is_valid():
-            print("DDDDDDDDDDDDDDDd")
+        request_website = request.POST.get('website_input')
+        request_username = request.POST.get('username_input')
+        request_password = request.POST.get('password_input')
+        request_price = request.POST.get('price_input')
+        request_description = request.POST.get('description_input')
+        request_accept_checkbox = request.POST.get('accept_checkbox_input')
 
-            form.save()
-            print("EEEEEEEEEEEEEEEE")
+        msg = insert_request_to_sqlite(request_website, request_username, request_password, request_price, request_description, request_accept_checkbox, request)
 
-            username = form.cleaned_data.get("website_input")
-            password = form.cleaned_data.get("password")
-            website = form.cleaned_data.get("website")
-            description = form.cleaned_data.get("description")
-            price = form.cleaned_data.get("price")
-            print("FFFFFFFFFFFFFFFFFF")
+        # print("website   :" + str(request_website))
+        # print("username   :" + str(request.POST.get('username_input')))
+        # print("pass   :" + str(request.POST.get('password_input')))
+        # print("price   :" + str(request.POST.get('price_input')))
+        # print("description   :" + str(request.POST.get('description_input')))
+        # print("checkbox   :" + str(request.POST.get('accept_checkbox_input')))
 
-            user_id = form.cleaned_data.user.id
-            print("GGGGGGGGGGGGGGGGGGGg")
 
-            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-            print("price:" + str(price) + " username:" + str(username) + " password:" + str(password) + " website:" + str(website)  + " description: " + str(description) + " user_id:" + str(user_id))
-            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-            print("HHHHHHHHHHHHHHHHHHHHHHHH")
 
-            msg = 'Request inserted - please <a href="/login">login</a>.'
-            success = True
+        msg = 'Request inserted - please <a href="/login">login</a>.'
 
-            # return redirect("/login/")
-
-        else:
-            print("ZZZZZZZZZZZZZZZZZZZZZZz")
-
-            msg = 'Form is not valid'
     else:
         pass
     return render(request, "requests.html", {"form": form, "msg": msg, "success": success})

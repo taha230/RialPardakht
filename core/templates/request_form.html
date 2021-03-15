@@ -26,7 +26,7 @@
                   <span >وبسایت</span>
                 </div>
 
-                  <input id="web" type="text" name="web" value="{{ form.web }}">
+                  <input id="website" type="text" name="website_input" value="{{ request_website }}"></input>
               </div>
 
               <div class="text-muted text-right mt-2 mb-4">
@@ -34,7 +34,7 @@
                   <span >نام کاربری وبسایت</span>
                 </div>
 
-                  <input id="username" type="text" name="username_input" value="{{ request_username }}">
+                  <input id="username" type="text" name="username_input" value="{{ request_username }}"></input>
               </div>
 
               <div class="text-muted text-right mt-2 mb-4">
@@ -42,7 +42,8 @@
                   <span >پسورد</span>
                 </div>
 
-                  <input id="password" type="text" name="password_input" value="{{ request_password }}">
+                  <input id="password" type="text" name="password_input" value='{{request_password}}'></input>
+
               </div>
 
               <div class="text-muted text-right mt-2 mb-4">
@@ -50,7 +51,7 @@
                   <span >قیمت</span>
                 </div>
 
-                  <input id="price" type="text" name="price_input" value="{{ request_price }}">
+                  <input id="price" type="text" name="price_input" value="{{ request_price }}"></input>
               </div>
 
               <div class="text-muted text-right mt-2 mb-4">
@@ -74,6 +75,7 @@
               <br>
 
               <div class="text-muted text-center mt-2 mb-4">
+
 
                 <input type="submit" class="btn btn-primary mt-4" value="ثبت درخواست جدید">
               </div>
