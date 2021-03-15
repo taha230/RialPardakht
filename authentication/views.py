@@ -12,6 +12,8 @@ from django.contrib.auth.models import User
 from django.forms.utils import ErrorList
 from django.http import HttpResponse
 from .forms import LoginForm, SignUpForm
+import sqlite3
+import datetime
 
 def home_view(request):
     form = LoginForm(request.POST or None)
@@ -82,9 +84,43 @@ def register_user(request):
 
     return render(request, "accounts/register.html", {"form": form, "msg" : msg, "success" : success })
 
-
 def insert_request_to_sqlite(request_website, request_username, request_password, request_price, request_description, request_accept_checkbox, request):
-    print('user_id : ' + str(request.user.id ))
+    
+    # print('user_id : ' + str(request.user.id ))
+
+    onn = None
+
+    db_file = 'db.sqlite3'
+    try:
+
+        conn = sqlite3.connect(db_file)
+        c = conn.cursor()
+
+        ################################ Insert to Requests Table #################################
+        c.execute(" INSERT INTO auth_requests(user_id, website, username, password, price, description, status, time_slot) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+         (str(request.user.id),
+         str(request_website),
+         str(request_username),
+         str(request_password),
+         str(request_price),
+         str(request_description),
+         "PENDING",
+         datetime.datetime.now()
+         )
+         )
+
+        conn.commit()
+
+        c.close()
+        conn.close()
+        print('Request inserted successfully !!!')
+
+    except Exception as e:
+        print('Unsuccessful insertion !!!')
+        print(e)
+        return 'Fail'
+
+
     return 'Success'
 
 def insert_request(request):

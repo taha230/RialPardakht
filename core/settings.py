@@ -7,6 +7,49 @@ import os
 from decouple import config
 from unipath import Path
 import dj_database_url
+import sqlite3
+
+
+# Define tables for requests and tickets from users
+def init_db_table_definition():
+
+    conn = None
+
+    db_file = 'db.sqlite3'
+    try:
+        conn = sqlite3.connect(db_file)
+        c = conn.cursor()
+
+        ################################ Requests Table #################################
+        c.execute(""" CREATE TABLE IF NOT EXISTS auth_requests(
+            id integer PRIMARY KEY,
+            user_id integer NOT NULL,
+            website text,
+            username text,
+            password text,
+            price real,
+            description text,
+            status text,
+            time_slot timestamp
+        ); """)
+
+        ################################ Tickets Table #################################
+        c.execute(""" CREATE TABLE IF NOT EXISTS auth_tickets(
+            id integer PRIMARY KEY,
+            user_id integer NOT NULL,
+            body text,
+            answer text,
+            status text,
+            time_slot timestamp
+        ); """)
+
+        c.close()
+        conn.close()
+        print('tables create successfully !!!')
+
+    except Exception as e:
+        print('Unsuccessful !!!')
+        print(e)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).parent
@@ -76,6 +119,8 @@ DATABASES = {
         'NAME'  : 'db.sqlite3',
     }
 }
+
+init_db_table_definition()
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
