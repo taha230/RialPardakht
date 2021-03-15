@@ -15,10 +15,12 @@ from .forms import LoginForm, SignUpForm
 import sqlite3
 import datetime
 
+
 def home_view(request):
     form = LoginForm(request.POST or None)
 
     msg = None
+
 
     if request.method == "POST":
 
@@ -28,14 +30,13 @@ def home_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                return redirect("/home")
             else:
                 msg = 'Invalid credentials'
         else:
             msg = 'Error validating the form'
 
     return render(request, "accounts/homepage.html", {"form": form, "msg" : msg})
-
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -52,13 +53,13 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                return redirect("/dashboard/")
             else:    
                 msg = 'Invalid credentials'    
         else:
             msg = 'Error validating the form'    
 
-    return render(request, "accounts/login.html", {"form": form, "msg" : msg})
+    return render(request, "accounts/login.html", {"form": form, "msg" : msg, 'c1': 'ali'})
 
 def register_user(request):
 
@@ -83,8 +84,6 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg" : msg, "success" : success })
-
-
 
 def get_request_list_from_sqlite_by_user_id(request):
     
@@ -232,7 +231,6 @@ def get_request_list_from_sqlite_all():
         print(e)
         return [], [], [], 0, 0, 0, 0, 0, 0, 0
 
-
 def insert_request_to_sqlite(request_website, request_username, request_password, request_price, request_description, request_accept_checkbox, request):
     
     # print('user_id : ' + str(request.user.id ))
@@ -293,10 +291,32 @@ def insert_request(request):
         # request_list, total_count, pending_count, processed_count, digikala_count, namava_count, filimo_count, other_website_count = get_request_list_from_sqlite_by_user_id(request)
         # request_list_all, request_list_pending, request_list_processed, total_count, pending_count, processed_count, digikala_count, namava_count, filimo_count, other_website_count = get_request_list_from_sqlite_all()
 
-
-
-        msg = 'Request inserted - please <a href="/login">login</a>.'
-
     else:
         pass
     return render(request, "requests.html", {"form": form, "msg": msg, "success": success})
+
+def dashboard_view(request):
+
+    form = LoginForm(request.POST or None)
+    msg = None
+    row_list, total_count, pending_count, processed_count, digikala_count, namava_count, filimo_count, other_website_count = get_request_list_from_sqlite_by_user_id(request)
+    digikala_percent = digikala_count / total_count* 100
+    namava_percent = namava_count / total_count * 100
+    filimo_percent = filimo_count / total_count * 100
+    other_website_percent = other_website_count / total_count * 100
+
+    context = {'row_list': row_list,
+              'total_count': total_count,
+              'pending_count': pending_count,
+              'processed_count': processed_count,
+              'digikala_count': digikala_count,
+              'namava_count': namava_count,
+              'filimo_count': filimo_count,
+              'other_website_count': other_website_count,
+              'digikala_percent': digikala_percent,
+              'namava_percent': namava_percent,
+              'filimo_percent': filimo_percent,
+              'other_website_percent': other_website_percent,
+              "form": form, "msg" : msg
+              }
+    return render(request, "index.html", context)

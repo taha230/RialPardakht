@@ -18,8 +18,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Total Requests</h5>
-                      <span class="h2 font-weight-bold mb-0">5</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">تعداد کل درخواست ها</h5>
+                      <span class="h2 font-weight-bold mb-0">{{ total_count }}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -36,8 +36,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pending</h5>
-                      <span class="h2 font-weight-bold mb-0">1</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">درخواست های در صف اجرا</h5>
+                      <span class="h2 font-weight-bold mb-0">{{ pending_count }}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -55,8 +55,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Processed</h5>
-                      <span class="h2 font-weight-bold mb-0">4</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">درخواست های اجرا شده</h5>
+                      <span class="h2 font-weight-bold mb-0">{{ processed_count }}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -112,9 +112,9 @@
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">Referral</th>
-                    <th scope="col">Visitors</th>
-                    <th scope="col"></th>
+                    <th scope="col">Website name</th>
+                    <th scope="col">Request num</th>
+                    <th scope="col">Percent</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -124,11 +124,11 @@
                       Digikala
                     </th>
                     <td>
-                      5,480
+                      {{ digikala_count }}
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
-                        <span class="mr-2">70%</span>
+                        <span class="mr-2">{{ digikala_percent }}%</span>
                         <div>
                           <div class="progress">
                             <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
@@ -143,11 +143,11 @@
                       Filimo
                     </th>
                     <td>
-                      3,678
+                      {{ filimo_count }}
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
-                        <span class="mr-2">75%</span>
+                        <span class="mr-2">{{ filimo_percent }}%</span>
                         <div>
                           <div class="progress">
                             <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
@@ -161,11 +161,29 @@
                       Namava
                     </th>
                     <td>
-                      2,645
+                      {{ namava_count }}
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
-                        <span class="mr-2">30%</span>
+                        <span class="mr-2">{{ namava_percent }}%</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                <tr>
+                    <th scope="row">
+                      Other_websites
+                    </th>
+                    <td>
+                      {{ other_website_count }}
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2">{{ other_website_percent }}%</span>
                         <div>
                           <div class="progress">
                             <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>

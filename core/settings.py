@@ -120,6 +120,7 @@ DATABASES = {
     }
 }
 
+# initialaize the sqlite3 db for not-defined tables
 init_db_table_definition()
 
 # Password validation

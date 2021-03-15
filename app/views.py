@@ -19,7 +19,7 @@ def index(request):
     return HttpResponse(html_template.render(context, request))
 
 
-@login_required(login_url="/home/")
+@login_required(login_url="/dashboard/")
 def home(request):
     context = {}
     context['segment'] = 'index'
@@ -33,6 +33,14 @@ def requests(request):
     context['segment'] = 'index'
 
     html_template = loader.get_template('requests.html')
+    return HttpResponse(html_template.render(context, request))
+
+@login_required(login_url="/dashboard/")
+def dashboard(request):
+    context = {}
+    context['segment'] = 'index'
+
+    html_template = loader.get_template('index.html')
     return HttpResponse(html_template.render(context, request))
 
 @login_required(login_url="/login/")
