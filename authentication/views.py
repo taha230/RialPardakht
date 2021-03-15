@@ -320,3 +320,29 @@ def dashboard_view(request):
               "form": form, "msg" : msg
               }
     return render(request, "index.html", context)
+
+def requests_view(request):
+
+    form = LoginForm(request.POST or None)
+    msg = None
+    row_list, total_count, pending_count, processed_count, digikala_count, namava_count, filimo_count, other_website_count = get_request_list_from_sqlite_by_user_id(request)
+    digikala_percent = digikala_count / total_count* 100
+    namava_percent = namava_count / total_count * 100
+    filimo_percent = filimo_count / total_count * 100
+    other_website_percent = other_website_count / total_count * 100
+
+    context = {'row_list': row_list,
+              'total_count': total_count,
+              'pending_count': pending_count,
+              'processed_count': processed_count,
+              'digikala_count': digikala_count,
+              'namava_count': namava_count,
+              'filimo_count': filimo_count,
+              'other_website_count': other_website_count,
+              'digikala_percent': digikala_percent,
+              'namava_percent': namava_percent,
+              'filimo_percent': filimo_percent,
+              'other_website_percent': other_website_percent,
+              "form": form, "msg" : msg
+              }
+    return render(request, "requests.html", context)
