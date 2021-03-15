@@ -84,6 +84,155 @@ def register_user(request):
 
     return render(request, "accounts/register.html", {"form": form, "msg" : msg, "success" : success })
 
+
+
+def get_request_list_from_sqlite_by_user_id(request):
+    
+    onn = None
+
+    db_file = 'db.sqlite3'
+    try:
+
+        conn = sqlite3.connect(db_file)
+        c = conn.cursor()
+
+        ################################ Select from Requests Table #################################
+        c.execute(" SELECT * FROM auth_requests WHERE user_id=?", (str(request.user.id)))
+
+        row_list = []
+
+        pending_count = 0
+        processed_count = 0
+        total_count = 0
+
+        digikala_count = 0
+        namava_count = 0
+        filimo_count = 0
+        other_website_count = 0
+
+        for row in list(c):
+            if (len(row) == 9):
+
+                row_json = {}
+                row_json['id'] = row[0]
+                row_json['user_id'] = row[1]
+                row_json['website'] = row[2]
+                row_json['username'] = row[3]
+                row_json['password'] = row[4]
+                row_json['price'] = row[5]
+                row_json['description'] = row[6]
+                row_json['status'] = row[7]
+                row_json['time_slot'] = row[8]
+
+                row_list.append(row_json)
+
+                ########### check count ############################
+                if (row_json['status'] == 'PENDING'):
+                    pending_count += 1
+                else:
+                    processed_count += 1
+                total_count += 1
+
+                ############ check website ##########################
+                if ('digikala' in row_json['website']):
+                    digikala_count += 1
+                elif ('namava' in row_json['website']):
+                    namava_count += 1
+                elif ('filimo' in row_json['website']):
+                    filimo_count += 1
+                else :
+                    other_website_count += 1
+
+
+
+        c.close()
+        conn.close()
+        print('Request select successfully from user_id ' + str(request.user.id) + ' !!!')
+
+        return row_list, total_count, pending_count, processed_count, digikala_count, namava_count, filimo_count, other_website_count
+
+    except Exception as e:
+        print('Unsuccessful selection !!!')
+        print(e)
+        return [], 0, 0, 0, 0, 0, 0, 0
+       
+def get_request_list_from_sqlite_all():
+    
+    onn = None
+
+    db_file = 'db.sqlite3'
+    try:
+
+        conn = sqlite3.connect(db_file)
+        c = conn.cursor()
+
+        ################################ Select from Requests Table #################################
+        c.execute(" SELECT * FROM auth_requests")
+
+        row_list_all = []
+        row_list_pending = []
+        row_list_processed = []
+
+
+        pending_count = 0
+        processed_count = 0
+        total_count = 0
+
+        digikala_count = 0
+        namava_count = 0
+        filimo_count = 0
+        other_website_count = 0
+
+        for row in list(c):
+            if (len(row) == 9):
+
+                row_json = {}
+                row_json['id'] = row[0]
+                row_json['user_id'] = row[1]
+                row_json['website'] = row[2]
+                row_json['username'] = row[3]
+                row_json['password'] = row[4]
+                row_json['price'] = row[5]
+                row_json['description'] = row[6]
+                row_json['status'] = row[7]
+                row_json['time_slot'] = row[8]
+
+                row_list_all.append(row_json)
+
+                ########### check count ############################
+                if (row_json['status'] == 'PENDING'):
+                    pending_count += 1
+                    row_list_pending.append(row_json)
+                else:
+                    processed_count += 1
+                    row_list_processed.append(row_json)
+
+                total_count += 1
+
+                ############ check website ##########################
+                if ('digikala' in row_json['website']):
+                    digikala_count += 1
+                elif ('namava' in row_json['website']):
+                    namava_count += 1
+                elif ('filimo' in row_json['website']):
+                    filimo_count += 1
+                else :
+                    other_website_count += 1
+
+
+
+        c.close()
+        conn.close()
+        print('All request select successfully !!!')
+
+        return row_list_all, row_list_pending, row_list_processed, total_count, pending_count, processed_count, digikala_count, namava_count, filimo_count, other_website_count
+
+    except Exception as e:
+        print('Unsuccessful selection !!!')
+        print(e)
+        return [], [], [], 0, 0, 0, 0, 0, 0, 0
+
+
 def insert_request_to_sqlite(request_website, request_username, request_password, request_price, request_description, request_accept_checkbox, request):
     
     # print('user_id : ' + str(request.user.id ))
@@ -141,13 +290,8 @@ def insert_request(request):
         request_accept_checkbox = request.POST.get('accept_checkbox_input')
 
         msg = insert_request_to_sqlite(request_website, request_username, request_password, request_price, request_description, request_accept_checkbox, request)
-
-        # print("website   :" + str(request_website))
-        # print("username   :" + str(request.POST.get('username_input')))
-        # print("pass   :" + str(request.POST.get('password_input')))
-        # print("price   :" + str(request.POST.get('price_input')))
-        # print("description   :" + str(request.POST.get('description_input')))
-        # print("checkbox   :" + str(request.POST.get('accept_checkbox_input')))
+        # request_list, total_count, pending_count, processed_count, digikala_count, namava_count, filimo_count, other_website_count = get_request_list_from_sqlite_by_user_id(request)
+        # request_list_all, request_list_pending, request_list_processed, total_count, pending_count, processed_count, digikala_count, namava_count, filimo_count, other_website_count = get_request_list_from_sqlite_all()
 
 
 
