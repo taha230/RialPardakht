@@ -73,7 +73,7 @@ def register_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
 
-            msg     = 'User created - please <a href="/login">login</a>.'
+            msg     = 'User created - please <a href="/login/">login</a>.'
             success = True
             
             #return redirect("/login/")
@@ -270,7 +270,7 @@ def insert_request_to_sqlite(request_website, request_username, request_password
 
     return 'Success'
 
-def insert_request(request):
+def insert_request_to_db(request):
     msg = None
     success = False
 
@@ -293,17 +293,23 @@ def insert_request(request):
 
     else:
         pass
-    return render(request, "requests.html", {"form": form, "msg": msg, "success": success})
+    return render(request, "request_insert_result.html", {"form": form, "msg": msg, "success": success})
 
 def dashboard_view(request):
 
     form = LoginForm(request.POST or None)
     msg = None
     row_list, total_count, pending_count, processed_count, digikala_count, namava_count, filimo_count, other_website_count = get_request_list_from_sqlite_by_user_id(request)
-    digikala_percent = digikala_count / total_count* 100
-    namava_percent = namava_count / total_count * 100
-    filimo_percent = filimo_count / total_count * 100
-    other_website_percent = other_website_count / total_count * 100
+    if (total_count != 0):
+        digikala_percent = int(digikala_count / total_count* 100)
+        namava_percent = int(namava_count / total_count * 100)
+        filimo_percent = int(filimo_count / total_count * 100)
+        other_website_percent = int(other_website_count / total_count * 100)
+    else:
+        digikala_percent = 0
+        namava_percent = 0
+        filimo_percent = 0
+        other_website_percent = 0
 
     context = {'row_list': row_list,
               'total_count': total_count,
@@ -326,10 +332,16 @@ def requests_view(request):
     form = LoginForm(request.POST or None)
     msg = None
     row_list, total_count, pending_count, processed_count, digikala_count, namava_count, filimo_count, other_website_count = get_request_list_from_sqlite_by_user_id(request)
-    digikala_percent = digikala_count / total_count* 100
-    namava_percent = namava_count / total_count * 100
-    filimo_percent = filimo_count / total_count * 100
-    other_website_percent = other_website_count / total_count * 100
+    if (total_count != 0):
+        digikala_percent = int(digikala_count / total_count* 100)
+        namava_percent = int(namava_count / total_count * 100)
+        filimo_percent = int(filimo_count / total_count * 100)
+        other_website_percent = int(other_website_count / total_count * 100)
+    else:
+        digikala_percent = 0
+        namava_percent = 0
+        filimo_percent = 0
+        other_website_percent = 0
 
     context = {'row_list': row_list,
               'total_count': total_count,
