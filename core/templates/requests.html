@@ -113,6 +113,13 @@
         </div>
       </div>
 
+      <form action="request_form.html" method="post" >
+        {% csrf_token %}
+
+        <div class="text-muted text-center mt-2 mb-4">
+          <input type="submit" class="btn btn-primary mt-4"  value="ثبت درخواست جدید">
+        </div>
+      </form>
 
       {% include "includes/footer.html" %}
 
