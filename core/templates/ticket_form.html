@@ -4,9 +4,19 @@
 
 {% block content %}
 
-<br>
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
 
-<div class="row justify-content-center">
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid mt--7">
+
+
+        <div class="row justify-content-center">
 
 
         <div class="col-lg-6 col-md-8">
@@ -29,15 +39,9 @@
 
                   <input style="width: 600px; height:500px;" id="body" type="text" name="body_input" value="{{ ticket_body }}"></input>
               </div>
-
-              
-
               <br>
               <br>
-
               <div class="text-muted text-center mt-2 mb-4">
-
-
                 <input type="submit" class="btn btn-primary mt-4" value="ثبت پرسش">
               </div>
 
@@ -57,8 +61,11 @@
 
 
 
+      {% include "includes/footer.html" %}
+
+    </div>
 
 {% endblock content %}
 
-<!-- Specific JS goes HERE --> 
+<!-- Specific JS goes HERE -->
 {% block javascripts %}{% endblock javascripts %}
