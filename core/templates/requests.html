@@ -70,9 +70,9 @@
                     <td>
                       <span class="badge badge-dot mr-4">
                         {% if row.status == 'PENDING' %}
-                          <i class="bg-warning"></i> pending
+                           <span style="color:black; background-color:#ff9999;" class="mb-0 text-sm">Pending</span>
                         {% elif row.status == 'PROCESSED' %}
-                          <i class="bg-success"></i> completed
+                           <span style="color:black; background-color:#8cff66;" class="mb-0 text-sm">Completed</span>
                         {% endif %}
 
                       </span>

@@ -15504,8 +15504,12 @@ a.btn-icon-only {
   height: 350px;
 }
 
-.chart-sm {
-  height: 230px;
+.chart-simall {
+  height: 100px;
+}
+
+.chart-custom {
+  height: 180px;
 }
 
 .chart-legend {

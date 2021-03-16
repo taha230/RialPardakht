@@ -29,17 +29,16 @@
                   <tr>
                     <th scope="col">row</th>
                     <th scope="col">body</th>
-                    <th scope="col">answer</th>
                     <th scope="col">time</th>
                     <th scope="col">Status</th>
+                    <th scope="col">answer</th>
+
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for row in row_list %}
                   <tr>
-                    
-
                       <td>
                         {{row.id}}
                       </td>
@@ -48,9 +47,6 @@
                         {{row.body}}
                       </td>
 
-                      <td>
-                        {{row.answer}}
-                      </td>
 
                       <td>
                         {{row.time_slot}}
@@ -58,14 +54,21 @@
 
                       <td>
                         <span class="badge badge-dot mr-4">
+
                           {% if row.status == 'PENDING' %}
-                            <i class="bg-warning"></i> pending
+                           <span style="color:black; background-color:#ff9999;" class="mb-0 text-sm">Pending</span>
                           {% elif row.status == 'ANSWERED' %}
-                            <i class="bg-success"></i> answered
+                           <span style="color:black; background-color:#8cff66;" class="mb-0 text-sm">Answered</span>
                           {% endif %}
-  
+
                         </span>
                       </td>
+
+                      <td>
+                        {{row.answer}}
+                      </td>
+
+
   
                     </tr>
                   {% endfor %}

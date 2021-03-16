@@ -15,7 +15,6 @@
       <br>
       {% include "includes/tickets_statistics.html" %}
 
-
         </div>
       </div>
     </div>
@@ -24,23 +23,24 @@
       <div class="row">
         <div class="col-xl-4">
           <div class="card shadow">
-            <div class="card-header bg-transparent">
+            <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-uppercase text-muted ls-1 mb-1">Requests History</h6>
-                  <h2 class="mb-0">Total orders</h2>
+                  <h2 class="mb-0">Total Requests</h2>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <!-- Chart -->
-              <div class="chart">
+              <div class="chart-sm">
                 <canvas id="chart-orders" class="chart-canvas"></canvas>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xl-4">
+
+        <div class="col-xl-5">
           <div class="card shadow">
             <div class="card-header border-0">
               <div class="row align-items-center">
@@ -48,7 +48,7 @@
                   <h3 class="mb-0">Requests Websites</h3>
                 </div>
                 <div class="col text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">See all</a>
+<!--                  <a href="#!" class="btn btn-sm btn-primary">See all</a>-->
                 </div>
               </div>
             </div>
@@ -66,7 +66,14 @@
 
                   <tr>
                     <th scope="row">
-                      Digikala
+                      <div class="media align-items-center">
+                        <a  class="avatar rounded-circle mr-4">
+                          <img alt="Image placeholder" src="/static/assets/img/theme/digikala.jpeg">
+                        </a>
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">Digikala</span>
+                        </div>
+                      </div>
                     </th>
                     <td>
                       {{ digikala_count }}
@@ -85,7 +92,14 @@
 
                   <tr>
                     <th scope="row">
-                      Filimo
+                      <div class="media align-items-center">
+                        <a  class="avatar rounded-circle mr-4">
+                          <img alt="Image placeholder" src="/static/assets/img/theme/filimo.png">
+                        </a>
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">Filimo</span>
+                        </div>
+                      </div>
                     </th>
                     <td>
                       {{ filimo_count }}
@@ -103,7 +117,14 @@
                   </tr>
                   <tr>
                     <th scope="row">
-                      Namava
+                      <div class="media align-items-center">
+                        <a  class="avatar rounded-circle mr-4">
+                          <img alt="Image placeholder" src="/static/assets/img/theme/namava.jpeg">
+                        </a>
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">Namava</span>
+                        </div>
+                      </div>
                     </th>
                     <td>
                       {{ namava_count }}
@@ -121,7 +142,8 @@
                   </tr>
                 <tr>
                     <th scope="row">
-                      Others
+                      <span class="mb-0 text-sm">Others</span>
+
                     </th>
                     <td>
                       {{ other_website_count }}
@@ -145,9 +167,8 @@
 
 
       </div>
-
-
-
+      <br>
+      <br>
       {% include "includes/footer.html" %}
 
     </div>

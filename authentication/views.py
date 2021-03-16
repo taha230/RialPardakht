@@ -87,7 +87,7 @@ def register_user(request):
 
 def get_request_list_from_sqlite_by_user_id(request):
     
-    onn = None
+    conn = None
 
     db_file = 'db.sqlite3'
     try:
@@ -157,7 +157,7 @@ def get_request_list_from_sqlite_by_user_id(request):
 
 def get_ticket_list_from_sqlite_by_user_id(request):
     
-    onn = None
+    conn = None
 
     db_file = 'db.sqlite3'
     try:
@@ -208,7 +208,7 @@ def get_ticket_list_from_sqlite_by_user_id(request):
     except Exception as e:
         print('Unsuccessful selection !!!')
         print(e)
-        return [], 0, 0, 0, 0, 0, 0, 0
+        return [], 0, 0, 0
 
 def get_request_list_from_sqlite_all():
     
