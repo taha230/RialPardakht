@@ -1,0 +1,64 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Maps {% endblock title %}
+
+{% block content %}
+
+<br>
+
+<div class="row justify-content-center">
+
+
+        <div class="col-lg-6 col-md-8">
+
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-transparent pb-5">
+              <div class="text-muted text-right mt-2 mb-4"><h1>ایجاد پرسش جدید</h1></div>
+
+            </div>
+            <div class="card-body px-lg-5 py-lg-5">
+
+            <form action="/tickets_call_back_insert/" method="post" >
+
+             {% csrf_token %}
+
+              <div class="text-muted text-right mt-2 mb-4">
+                <div class=" text_right">
+                  <span >متن پرسش</span>
+                </div>
+
+                  <input style="width: 600px; height:500px;" id="body" type="text" name="body_input" value="{{ ticket_body }}"></input>
+              </div>
+
+              
+
+              <br>
+              <br>
+
+              <div class="text-muted text-center mt-2 mb-4">
+
+
+                <input type="submit" class="btn btn-primary mt-4" value="ثبت پرسش">
+              </div>
+
+            </form>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}
