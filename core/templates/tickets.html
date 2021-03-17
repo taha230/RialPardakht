@@ -65,7 +65,13 @@
                       </td>
 
                       <td>
-                        {{row.answer}}
+                        {% if row.answer != '' %}
+                          <form ac method="post" >
+                            {% csrf_token %}
+                              <input onclick="open_win('aaaaa')" type="submit"  style="width: 100px; height: 30px;" class=" btn-primary "  value="مشاهده پاسخ">
+                          </form>
+                        {% endif %}
+
                       </td>
 
 

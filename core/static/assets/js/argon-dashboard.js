@@ -968,7 +968,7 @@ var OrdersChart = (function() {
   // Variables
   //
 
-  var $chart = $('#chart-orders');
+  var $chart = $('#chart-order2s');
   var $ordersSelect = $('[name="ordersSelect"]');
 
 
@@ -1019,10 +1019,10 @@ var OrdersChart = (function() {
         }
       },
       data: {
-        labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: ['Jul1', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
           label: 'Sales',
-          data: [25, 20, 30, 22, 17, 29]
+          data: [0, 20, 30, 22, 17, 29]
         }]
       }
     });
@@ -1097,10 +1097,10 @@ var SalesChart = (function() {
         }
       },
       data: {
-        labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: ['May', 'Jun', 'Jul8', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
           label: 'Performance',
-          data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
+          data: [0, 0, 0, 30, 15, 40, 20, 60, 60]
         }]
       }
     });
